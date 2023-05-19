@@ -11,7 +11,7 @@ export interface Item {
     order: number
 }
 
-function defaultRenderItem(props: InnerThemeProps, item: Item): React.ReactElement {
+<!-- function defaultRenderItem(props: InnerThemeProps, item: Item): React.ReactElement {
     return (
         <Paper
             sx={{
@@ -29,6 +29,35 @@ function defaultRenderItem(props: InnerThemeProps, item: Item): React.ReactEleme
             </Typography>
         </Paper>
     )
+}
+ -->
+
+function defaultRenderItem(props: InnerThemeProps, item: Item): React.ReactElement {
+    return (
+        <Paper
+            sx={{
+                width: props.width ?? '100%',
+                backgroundColor: props.theme.backgroundColor,
+                padding: 16,
+                marginBottom: 16,
+                border: '1px solid ' + props.theme.secondaryBackgroundColor,
+                borderRadius: 8,
+                transition: 'border-color 0.2s ease-in-out',
+                '&:hover': {
+                    borderColor: props.theme.primaryColor,
+                },
+            }}
+        >
+            <Typography
+                color={props.theme.textColor}
+                fontFamily={props.theme.font}
+                fontSize="1.2em"
+                fontWeight="bold"
+            >
+                {item.name}
+            </Typography>
+        </Paper>
+    );
 }
 
 const applyDrag = (arr: Item[], dropResult: DropResult, initSort: boolean) => {
